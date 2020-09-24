@@ -5,7 +5,7 @@ type Props = {
   user: string
 }
 
-const User: React.FC<Props> = ({ user }) => {
+const User: React.FC<Props> = ({ user }: Props) => {
   return <p>{user}</p>
 }
 

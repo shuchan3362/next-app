@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { firebase } from "~/firebase"
 import Link from "next/link"
 
@@ -9,6 +9,7 @@ const Home: React.FC = () => {
   const [loginPassword, setLoginPassword] = useState<string>("")
   const [displayName, setDisplayName] = useState<string>("")
   const auth = firebase.auth()
+  const user = auth.currentUser
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -31,18 +32,14 @@ const Home: React.FC = () => {
       .catch((err) => console.log(err))
   }
 
-  const user = auth.currentUser
   const [loginUser, setLoginUser] = useState<string>("")
-  console.log(loginUser)
   useEffect(() => {
-    if (user?.displayName) {
-      setLoginUser(user.displayName)
-    }
-  }, [user])
-
-  // const loginUser = useMemo(() => {
-  //   return user?.displayName ? user?.displayName : ""
-  // }, [user])
+    auth.onAuthStateChanged((user) => {
+      if (user?.displayName) {
+        setLoginUser(user?.displayName)
+      }
+    })
+  }, [auth])
 
   const signOut = () => {
     auth
