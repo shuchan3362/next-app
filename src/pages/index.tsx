@@ -1,131 +1,30 @@
-import React, { useEffect, useState } from "react"
-import { firebase } from "~/firebase"
-import Link from "next/link"
+import React from "react"
+import styled from "styled-components"
+import { Box } from "~/components/atoms/Box"
+import { Block } from "~/components/atoms/Neumorphism"
+import { Header } from "~/components/organisms/header"
+
+const Wrapper = styled(Box)`
+  height: 100vh;
+  padding: 10px 30px;
+`
+
+const Content = styled(Block)`
+  height: 90%;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  overflow: auto;
+  padding: 0 0 0 10px;
+  border-radius: 6px;
+`
 
 const Home: React.FC = () => {
-  const [newEmail, setNewEmail] = useState<string>("")
-  const [newPassword, setNewPassword] = useState<string>("")
-  const [loginEmail, setLoginEmail] = useState<string>("")
-  const [loginPassword, setLoginPassword] = useState<string>("")
-  const [displayName, setDisplayName] = useState<string>("")
-  const auth = firebase.auth()
-  const user = auth.currentUser
-
-  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    await auth
-      .createUserWithEmailAndPassword(newEmail, newPassword)
-      .then(() => {
-        auth.currentUser?.updateProfile({
-          displayName: displayName,
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    auth
-      .signInWithEmailAndPassword(loginEmail, loginPassword)
-      .catch((err) => console.log(err))
-  }
-
-  const [loginUser, setLoginUser] = useState<string>("")
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user?.displayName) {
-        setLoginUser(user?.displayName)
-      }
-    })
-  }, [auth])
-
-  const signOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        console.log("successfully signout")
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const deleteAccount = () => {
-    user
-      ?.delete()
-      .then(() => {
-        console.log("successfully delete your account")
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   return (
-    <div>
-      <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSignIn(e)}>
-        <p>ユーザーネーム</p>
-        <input
-          name="userName"
-          type="text"
-          value={displayName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setDisplayName(e.target.value)
-          }}
-        />
-        <p>email</p>
-        <input
-          name="email"
-          type="text"
-          value={newEmail}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setNewEmail(e.target.value)
-          }
-        />
-        <p>password</p>
-        <input
-          name="password"
-          type="password"
-          value={newPassword}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setNewPassword(e.target.value)
-          }
-        />
-        <button type="submit" />
-      </form>
-      <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleLogin(e)}>
-        <p>ログインメール</p>
-        <input
-          name="email"
-          type="text"
-          value={loginEmail}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setLoginEmail(e.target.value)
-          }
-        />
-        <p>ログインパスワード</p>
-        <input
-          name="password"
-          type="password"
-          value={loginPassword}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setLoginPassword(e.target.value)
-          }
-        />
-        <button type="submit" />
-      </form>
-      <div>
-        <button onClick={signOut}>ログアウト</button>
-      </div>
-      <div>
-        <button onClick={deleteAccount}>アカウント削除</button>
-      </div>
-      <div>
-        <Link href={`/user/${loginUser}`}>{loginUser}</Link>
-      </div>
-    </div>
+    <Wrapper>
+      <Header />
+      <Content></Content>
+    </Wrapper>
   )
 }
 
