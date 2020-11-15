@@ -60,7 +60,7 @@ const ResetPassword: React.FC = () => {
     if (loginErr) {
       setNowLoading(false)
     }
-  }, [user, nowLoading, loginErr])
+  }, [user, nowLoading, loginErr, router])
 
   const sendResetEmail = (e: React.FormEvent<HTMLFormElement>) => {
     resetPassword(e)

@@ -80,7 +80,7 @@ const Delete: React.FC = () => {
     if (signUpErr) {
       setNowLoading(false)
     }
-  }, [user, nowLoading, signUpErr])
+  }, [user, nowLoading, signUpErr, router])
 
   const handleDelete = (e: React.FormEvent<HTMLFormElement>) => {
     deleteAccount(e)

@@ -68,7 +68,7 @@ const SignUp: React.FC = () => {
     if (signUpErr) {
       setNowLoading(false)
     }
-  }, [user, nowLoading, signUpErr])
+  }, [user, nowLoading, signUpErr, router])
 
   const signUp = (e: React.FormEvent<HTMLFormElement>, url: string) => {
     handleSignUp(e, url)

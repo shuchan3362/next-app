@@ -71,7 +71,7 @@ const Login: React.FC = () => {
     if (loginErr) {
       setNowLoading(false)
     }
-  }, [user, nowLoading, loginErr])
+  }, [user, nowLoading, loginErr, router])
 
   const handleSiginIn = (e: React.FormEvent<HTMLFormElement>, url: string) => {
     handleLogin(e, url)
