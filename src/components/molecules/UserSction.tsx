@@ -143,6 +143,7 @@ export const UserSection: React.FC<Props> = ({
       <UserName>{userName}</UserName>
       <UserItem onClick={() => handleClick()} styles={styles}></UserItem>
       <Modal
+        closeTimeoutMS={300}
         isOpen={isOpen}
         onRequestClose={() => handleClick()}
         style={modalStyle}
@@ -162,6 +163,7 @@ export const UserSection: React.FC<Props> = ({
           </UserItem>
         ))}
       <Modal
+        closeTimeoutMS={300}
         isOpen={isItemOpen}
         onRequestClose={() => openItem()}
         style={modalStyle}

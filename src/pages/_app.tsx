@@ -39,8 +39,19 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  .MuiTooltip-popper{
-    height: auto;
+
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: 0.3s;
+  }
+  
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+  
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
   }
   `
 
