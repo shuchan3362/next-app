@@ -41,5 +41,3 @@ export default function Projects(): JSX.Element {
     </Wrapper>
   )
 }
-
-// export default Projects
